@@ -11,17 +11,24 @@ stages:
       name: Hosted Ubuntu 1604
     steps:
     # Needed for Terraform VM deployment
-    # - task: InstallSSHKey@0
-    #   inputs:
-    #     knownHostsEntry: 'KNOWN_HOSTS_STRING'
-    #     sshPublicKey: 'PUBLIC_KEY'
-    #     sshKeySecureFile: 'id_rsa'
-   
-    - task: Bash@3
-      inputs:
-        targetType: 'inline'
-        script: |
-          echo $ARM_ACCESS_KEY
+      - task: InstallSSHKey@0
+        inputs:
+          knownHostsEntry: '140.82.112.3 ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ=='
+          sshPublicKey: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDMcKE23z2k3YNy1W6QE8wj6Etp9SzQ2kazAnvyAm39CYZ59RHyKGKkDrkFSvjVELevAKaO6G1+o3cOBMmfLjnzIHhbyexonBlt1W1+3JzEMe6YWz/rL9tJ9MYIP7S19F5IH3rzvo7BkoH45HYA/yof1wgSA/hILVYlAENlooi3XILXcDJPYrRz4ZsChs89ROL8b+f2ONtCesXPR+sJGvMbU6kDSx7NYAjjEZcnZaVXAipymK++8bckbL3MnTXL/0uMHAWF59qIz43DPMnkw+Yved3kEk/+CwEkUWY+JJ+RfqtAnAtCXNjEU1XqJy0BzcVuLUJiQNkHmK/3ZlEgx9HR DaniB@MacBook-Pro-de-Daniela.local'
+          sshKeySecureFile: 'id_rsa'
+      - task: TerraformInstaller@0
+        inputs:
+          terraformVersion: 'latest'
+          displayName: Install Terraform
+      - task: TerraformCLI@0
+        inputs:
+          command: 'apply'
+          environmentServiceName: 'Suscripción de Azure 1 (657e3c6a-61f6-4b76-b7f0-95d07ef5a71b)'
+          args: --auto-approve -var location="eastus" -var resource_group="quality_projects" -var application_type="quality" -var virtual_network_name="quality_virtual_network" -var address_space=["10.5.0.0/16"] -var address_prefix_test="10.5.1.0/24" -var admin="helloadmin"
+
+
+
+
     #- task: ArchiveFiles@2
     #  displayName: 'Archive FakeRestAPI'
     #  inputs:
