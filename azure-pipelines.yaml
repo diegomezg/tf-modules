@@ -29,11 +29,8 @@ stages:
       - task: TerraformCLI@0
         inputs:
           command: 'apply'
-          environmentServiceName: 'Suscripción de Azure 1 (657e3c6a-61f6-4b76-b7f0-95d07ef5a71b)'
+          environmentServiceName: 'connection for quality_projects'
           args: --auto-approve -var location="eastus" -var resource_group="quality_projects" -var application_type="quality" -var virtual_network_name="quality_virtual_network" -var address_space=["10.5.0.0/16"] -var address_prefix_test="10.5.1.0/24" -var admin="helloadmin"
-
-
-
 
     #- task: ArchiveFiles@2
     #  displayName: 'Archive FakeRestAPI'
