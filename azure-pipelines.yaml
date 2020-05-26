@@ -1,13 +1,8 @@
 name: Azure Pipelines
-- task: AzureKeyVault@1
-  inputs:
-    azureSubscription: 'Suscripción de Azure 1 (657e3c6a-61f6-4b76-b7f0-95d07ef5a71b)'
-    KeyVaultName: 'tstatevaultdani452'
-    SecretsFilter: 'TerraformStorageKey'
-    RunAsPreJob: false
+
 variables:
   python.version: '3.7.6'
-  ARM_ACCESS_KEY: 'TerraformStorageKey'
+  #ARM_ACCESS_KEY: 'TerraformStorageKey'
 stages:
 - stage: Build
   jobs:
@@ -21,8 +16,17 @@ stages:
     #     knownHostsEntry: 'KNOWN_HOSTS_STRING'
     #     sshPublicKey: 'PUBLIC_KEY'
     #     sshKeySecureFile: 'id_rsa'
-      script:
-        echo $ARM_ACCESS_KEY
+    - task: AzureKeyVault@1
+      inputs:
+        azureSubscription: 'Suscripción de Azure 1 (657e3c6a-61f6-4b76-b7f0-95d07ef5a71b)'
+        KeyVaultName: 'tstatevaultdani452'
+        SecretsFilter: 'TerraformStorageKey'
+        RunAsPreJob: false
+    - task: Bash@3
+      inputs:
+        targetType: 'inline'
+        script: |
+          echo $TerraformStorageKey
     #- task: ArchiveFiles@2
     #  displayName: 'Archive FakeRestAPI'
     #  inputs:
