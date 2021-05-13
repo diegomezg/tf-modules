@@ -8,9 +8,6 @@ provider "azurerm" {
   # client_secret   = "${var.client_secret}"
   features {}
 }
-# storage_account_name: storagetestdg
-# container_name: tstate
-# access_key: JRjk/BNJLObDCYgAU8UpufOvt9EQfwsudaLVH7b6C84DPlkYdfE4iwsL4+gwmebb5LVjZReRTaYoN5gN6Gr/PQ==
 
 terraform {
   backend "azurerm" {
