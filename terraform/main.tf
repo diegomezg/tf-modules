@@ -14,8 +14,8 @@ terraform {
     resource_group_name  = "diego-gomez"
     storage_account_name = "storagetestdg"
     container_name       = "tstate"
-    key                  = "terraform.tfstate"
-    access_key           = "JRjk/BNJLObDCYgAU8UpufOvt9EQfwsudaLVH7b6C84DPlkYdfE4iwsL4+gwmebb5LVjZReRTaYoN5gN6Gr/PQ=="
+    key                  = "your-key-here"
+    access_key           = "your-secret-here"
   }
 }
 
